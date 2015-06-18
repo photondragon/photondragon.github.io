@@ -7,3 +7,11 @@ categories:
 ---
 
 欢迎来到迷途老码的博客
+
+这是摘要部分
+
+-这是正文部分
+
+$$
+f'\left( x\right) = \lim _{x\rightarrow 0}\dfrac {f\left( x+\Delta x\right) - f\left( x\right)}{\Delta x}
+$$
