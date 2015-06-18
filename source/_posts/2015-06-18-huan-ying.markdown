@@ -1,0 +1,9 @@
+---
+layout: post
+title: "欢迎来到迷途老码的博客"
+date: 2015-06-18 00:51:59 +0800
+comments: true
+categories: 
+---
+
+欢迎来到迷途老码的博客
