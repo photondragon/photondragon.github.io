@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[迷途老码的博客]]></title>
+  <link href="http://www.iosdev.net/atom.xml" rel="self"/>
+  <link href="http://www.iosdev.net/"/>
+  <updated>2015-06-21T04:24:02+08:00</updated>
+  <id>http://www.iosdev.net/</id>
+  <author>
+    <name><![CDATA[photondragon]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[测试]]></title>
+    <link href="http://www.iosdev.net/articles/201506/ce-shi"/>
+    <updated>2015-06-21T03:27:25+08:00</updated>
+    <id>http://www.iosdev.net/articles/201506/ce-shi</id>
+    <content type="html"><![CDATA[<ul id="markdown-toc">
+  <li><a href="#section" id="markdown-toc-section">一级标题1</a>    <ul>
+      <li><a href="#section-1" id="markdown-toc-section-1">二级标题11</a></li>
+      <li><a href="#section-2" id="markdown-toc-section-2">二级标题12</a>        <ul>
+          <li><a href="#section-3" id="markdown-toc-section-3">三级标题121</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<p>这是摘要部分
+<!--more--></p>
+
+<h1 id="section">一级标题1</h1>
+
+<h2 id="section-1">二级标题11</h2>
+
+<h2 id="section-2">二级标题12</h2>
+
+<h3 id="section-3">三级标题121</h3>
+
+<p>这是正文部分</p>
+
+<script type="math/tex; mode=display">f'\left( x\right) = \lim _{x\rightarrow 0}\dfrac {f\left( x+\Delta x\right) - f\left( x\right)}{\Delta x}</script>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>这是标题 </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+</pre></td><td class="code"><pre><code class="objc"><span class="line"><span class="cp">#import &lt;UIKit/UIKit.h&gt;</span>
+</span><span class="line">
+</span><span class="line"><span class="k">@interface</span> <span class="bp">UIView</span><span class="nl">(IDNKeyboard)</span>
+</span><span class="line">
+</span><span class="line"><span class="k">@property</span><span class="p">(</span><span class="k">nonatomic</span><span class="p">,</span><span class="k">strong</span><span class="p">)</span> <span class="kt">void</span> <span class="p">(</span><span class="o">^</span><span class="n">keyboardFrameWillChangeBlock</span><span class="p">)(</span><span class="n">CGFloat</span> <span class="n">bottomDistance</span><span class="p">,</span> <span class="kt">double</span> <span class="n">animationDuration</span><span class="p">,</span> <span class="n">UIViewAnimationCurve</span> <span class="n">animationCurve</span><span class="p">);</span> <span class="c1">//当键盘Frame改变时此Block被调用。bottomDistance是键盘顶部与self视图底部的距离；animationDuration是键盘动画持续时间</span>
+</span><span class="line">
+</span><span class="line"><span class="k">@end</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<pre lang="ruby"><code>def hello
+  puts "hello world"
+end
+</code></pre>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[欢迎来到迷途老码的博客]]></title>
+    <link href="http://www.iosdev.net/articles/201506/huan-ying"/>
+    <updated>2015-06-18T00:51:59+08:00</updated>
+    <id>http://www.iosdev.net/articles/201506/huan-ying</id>
+    <content type="html"><![CDATA[<p>欢迎来到迷途老码的博客</p>
+]]></content>
+  </entry>
+  
+</feed>
