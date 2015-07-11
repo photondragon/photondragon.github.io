@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[迷途老码的博客]]></title>
-  <link href="http://www.iosdev.net/atom.xml" rel="self"/>
-  <link href="http://www.iosdev.net/"/>
-  <updated>2015-06-21T04:24:02+08:00</updated>
-  <id>http://www.iosdev.net/</id>
+  <link href="http://blog.iosdev.net/atom.xml" rel="self"/>
+  <link href="http://blog.iosdev.net/"/>
+  <updated>2015-07-11T15:12:50+08:00</updated>
+  <id>http://blog.iosdev.net/</id>
   <author>
     <name><![CDATA[photondragon]]></name>
     
@@ -14,10 +14,37 @@
 
   
   <entry>
+    <title type="html"><![CDATA[显示图片的ios程序为什么会卡顿？]]></title>
+    <link href="http://blog.iosdev.net/articles/201506/xian-shi-tu-pian-de-ioscheng-xu-wei-shi-yao-hui-qia-dun-%3F"/>
+    <updated>2015-06-30T00:38:01+08:00</updated>
+    <id>http://blog.iosdev.net/articles/201506/xian-shi-tu-pian-de-ioscheng-xu-wei-shi-yao-hui-qia-dun-?</id>
+    <content type="html"><![CDATA[<p>在ios开发中，加载显示图片尤其是网络图片，大家首先想到的就是SDWebImage，那么这个库的背后的原理是什么？
+或者说程序显示图片卡顿的原因是什么？很多人会说是因为从网络或者从硬盘上读取图片慢啊</p>
+
+<p>使用多线程，把下载图片、读取图片的操作放到后台线程执行。</p>
+
+<p>图片显示过程：
+读取：将图像文件从磁盘读入内存
+解码：将jpg,png等格式的图像解码成原始的RGBA数据
+显示：将图像在屏幕上显示出来</p>
+
+<p>读取图像示例：
+UIImage* image = [UIImage imageNamed:@”loading.jpg”];
+UIImage* img = [UIImage imageWithContentsOfFile:imgfile];//从磁盘读取图像</p>
+
+<p>解码图像
+Apple没有直接提供图像解码的API接口，但可以通过一些技巧来得到解码后的图像，过程如下：
+创建一个图像缓冲区，CGBitmapContextCreate()
+将原始图像绘制到这个缓冲区中，CGContextDrawImage()
+利用缓冲区内容创建一个新的图像，CGBitmapContextCreateImage()</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[测试]]></title>
-    <link href="http://www.iosdev.net/articles/201506/ce-shi"/>
+    <link href="http://blog.iosdev.net/articles/201506/ce-shi"/>
     <updated>2015-06-21T03:27:25+08:00</updated>
-    <id>http://www.iosdev.net/articles/201506/ce-shi</id>
+    <id>http://blog.iosdev.net/articles/201506/ce-shi</id>
     <content type="html"><![CDATA[<ul id="markdown-toc">
   <li><a href="#section" id="markdown-toc-section">一级标题1</a>    <ul>
       <li><a href="#section-1" id="markdown-toc-section-1">二级标题11</a></li>
@@ -70,9 +97,9 @@ end
   
   <entry>
     <title type="html"><![CDATA[欢迎来到迷途老码的博客]]></title>
-    <link href="http://www.iosdev.net/articles/201506/huan-ying"/>
+    <link href="http://blog.iosdev.net/articles/201506/huan-ying"/>
     <updated>2015-06-18T00:51:59+08:00</updated>
-    <id>http://www.iosdev.net/articles/201506/huan-ying</id>
+    <id>http://blog.iosdev.net/articles/201506/huan-ying</id>
     <content type="html"><![CDATA[<p>欢迎来到迷途老码的博客</p>
 ]]></content>
   </entry>

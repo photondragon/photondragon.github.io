@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[分类: 杂项 | 迷途老码的博客]]></title>
-  <link href="http://www.iosdev.net/categories/za-xiang/atom.xml" rel="self"/>
-  <link href="http://www.iosdev.net/"/>
-  <updated>2015-06-21T04:24:02+08:00</updated>
-  <id>http://www.iosdev.net/</id>
+  <link href="http://blog.iosdev.net/categories/za-xiang/atom.xml" rel="self"/>
+  <link href="http://blog.iosdev.net/"/>
+  <updated>2015-07-11T15:12:50+08:00</updated>
+  <id>http://blog.iosdev.net/</id>
   <author>
     <name><![CDATA[photondragon]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[测试]]></title>
-    <link href="http://www.iosdev.net/articles/201506/ce-shi"/>
+    <link href="http://blog.iosdev.net/articles/201506/ce-shi"/>
     <updated>2015-06-21T03:27:25+08:00</updated>
-    <id>http://www.iosdev.net/articles/201506/ce-shi</id>
+    <id>http://blog.iosdev.net/articles/201506/ce-shi</id>
     <content type="html"><![CDATA[<ul id="markdown-toc">
   <li><a href="#section" id="markdown-toc-section">一级标题1</a>    <ul>
       <li><a href="#section-1" id="markdown-toc-section-1">二级标题11</a></li>
@@ -70,9 +70,9 @@ end
   
   <entry>
     <title type="html"><![CDATA[欢迎来到迷途老码的博客]]></title>
-    <link href="http://www.iosdev.net/articles/201506/huan-ying"/>
+    <link href="http://blog.iosdev.net/articles/201506/huan-ying"/>
     <updated>2015-06-18T00:51:59+08:00</updated>
-    <id>http://www.iosdev.net/articles/201506/huan-ying</id>
+    <id>http://blog.iosdev.net/articles/201506/huan-ying</id>
     <content type="html"><![CDATA[<p>欢迎来到迷途老码的博客</p>
 ]]></content>
   </entry>

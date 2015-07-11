@@ -9,8 +9,9 @@
   <meta name="author" content="photondragon">
 
   
-  <meta name="description" content=" 一级标题1 二级标题11 二级标题12 三级标题121 这是摘要部分
-">
+  <meta name="description" content="在ios开发中，加载显示图片尤其是网络图片，大家首先想到的就是SDWebImage，那么这个库的背后的原理是什么？
+或者说程序显示图片卡顿的原因是什么？很多人会说是因为从网络或者从硬盘上读取图片慢啊 使用多线程，把下载图片、读取图片的操作放到后台线程执行。 图片显示过程：
+读取： &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +20,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://www.iosdev.net/">
+  <link rel="canonical" href="http://blog.iosdev.net/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="迷途老码的博客" type="application/atom+xml">
@@ -79,7 +80,7 @@
   
 <form action="https://www.google.com/search" method="get">
   <fieldset role="search">
-    <input type="hidden" name="sitesearch" value="www.iosdev.net">
+    <input type="hidden" name="sitesearch" value="blog.iosdev.net">
     <input class="search" type="text" name="q" results="0" placeholder="搜索"/>
   </fieldset>
 </form>
@@ -94,6 +95,53 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/articles/201506/xian-shi-tu-pian-de-ioscheng-xu-wei-shi-yao-hui-qia-dun-%3F">显示图片的ios程序为什么会卡顿？</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-06-30T00:38:01+08:00'><span class='date'>2015年6月30日</span> <span class='time'>12:38 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>在ios开发中，加载显示图片尤其是网络图片，大家首先想到的就是SDWebImage，那么这个库的背后的原理是什么？
+或者说程序显示图片卡顿的原因是什么？很多人会说是因为从网络或者从硬盘上读取图片慢啊</p>
+
+<p>使用多线程，把下载图片、读取图片的操作放到后台线程执行。</p>
+
+<p>图片显示过程：
+读取：将图像文件从磁盘读入内存
+解码：将jpg,png等格式的图像解码成原始的RGBA数据
+显示：将图像在屏幕上显示出来</p>
+
+<p>读取图像示例：
+UIImage* image = [UIImage imageNamed:@”loading.jpg”];
+UIImage* img = [UIImage imageWithContentsOfFile:imgfile];//从磁盘读取图像</p>
+
+<p>解码图像
+Apple没有直接提供图像解码的API接口，但可以通过一些技巧来得到解码后的图像，过程如下：
+创建一个图像缓冲区，CGBitmapContextCreate()
+将原始图像绘制到这个缓冲区中，CGContextDrawImage()
+利用缓冲区内容创建一个新的图像，CGBitmapContextCreateImage()</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -179,6 +227,10 @@
     <section>
   <h1>最新文章</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/articles/201506/xian-shi-tu-pian-de-ioscheng-xu-wei-shi-yao-hui-qia-dun-%3F">显示图片的ios程序为什么会卡顿？</a>
+      </li>
     
       <li class="post">
         <a href="/articles/201506/ce-shi">测试</a>
