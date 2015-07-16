@@ -4,7 +4,7 @@
   <title><![CDATA[分类: 实用技巧 | 迷途老码的博客]]></title>
   <link href="http://blog.iosdev.net/categories/shi-yong-ji-qiao/atom.xml" rel="self"/>
   <link href="http://blog.iosdev.net/"/>
-  <updated>2015-07-17T00:57:00+08:00</updated>
+  <updated>2015-07-17T01:08:39+08:00</updated>
   <id>http://blog.iosdev.net/</id>
   <author>
     <name><![CDATA[photondragon]]></name>
@@ -14,11 +14,11 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Xcode代码片段]]></title>
+    <title type="html"><![CDATA[Xcode代码片段Snippets]]></title>
     <link href="http://blog.iosdev.net/articles/201507/xcodedai-ma-pian-duan"/>
     <updated>2015-07-16T22:53:21+08:00</updated>
     <id>http://blog.iosdev.net/articles/201507/xcodedai-ma-pian-duan</id>
-    <content type="html"><![CDATA[<p>代码片段Snippets主要用于加速度代码的输入速度。通过把常用的代码设置为Snippet，并分配一个简短的快捷字符串，程序员只需要输入这个快捷字符串，再按下tab键，xcode就会自动帮你输入预设的代码段。</p>
+    <content type="html"><![CDATA[<p>代码片段Snippets主要用于加速代码的输入速度。通过把常用的代码设置为Snippet，并分配一个简短的快捷字符串，你只需要输入这个快捷字符串，再按下tab键，xcode就会自动帮你输入预设的代码段。</p>
 
 <!--more-->
 
