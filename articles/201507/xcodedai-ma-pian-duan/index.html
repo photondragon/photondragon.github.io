@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>迷途老码的博客</title>
+  <title>Xcode代码片段 - 迷途老码的博客</title>
   <meta name="author" content="photondragon">
 
   
-  <meta name="description" content="代码片段Snippets主要用于加速度代码的输入速度。通过把常用的代码设置为Snippet，并分配一个简短的快捷字符串，程序员只需要输入这个快捷字符串，再按下tab键，xcode就会自动帮你输入预设的代码段。 ">
+  <meta name="description" content="代码片段Snippets主要用于加速度代码的输入速度。通过把常用的代码设置为Snippet，并分配一个简短的快捷字符串，程序员只需要输入这个快捷字符串，再按下tab键，xcode就会自动帮你输入预设的代码段。 创建代码段 选中一段代码，然后拖到右下角的Code Snippet Library窗口中 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://blog.iosdev.net/">
+  <link rel="canonical" href="http://blog.iosdev.net/articles/201507/xcodedai-ma-pian-duan">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="迷途老码的博客" type="application/atom+xml">
@@ -101,15 +101,12 @@ var _hmt = _hmt || [];
 </nav>
   <div id="main">
     <div id="content">
-      <div class="blog-index">
+      <div>
+<article class="hentry" role="article">
   
-  
-  
-    <article>
-      
   <header>
     
-      <h1 class="entry-title"><a href="/articles/201507/xcodedai-ma-pian-duan">Xcode代码片段</a></h1>
+      <h1 class="entry-title">Xcode代码片段</h1>
     
     
       <p class="meta">
@@ -125,98 +122,105 @@ var _hmt = _hmt || [];
   </header>
 
 
-  <div class="entry-content"><p>代码片段Snippets主要用于加速度代码的输入速度。通过把常用的代码设置为Snippet，并分配一个简短的快捷字符串，程序员只需要输入这个快捷字符串，再按下tab键，xcode就会自动帮你输入预设的代码段。</p>
+<div class="entry-content"><p>代码片段Snippets主要用于加速度代码的输入速度。通过把常用的代码设置为Snippet，并分配一个简短的快捷字符串，程序员只需要输入这个快捷字符串，再按下tab键，xcode就会自动帮你输入预设的代码段。</p>
 
+<!--more-->
+
+<h1 id="section">创建代码段</h1>
+
+<p>选中一段代码，然后拖到右下角的Code Snippet Library窗口中，将创建一个自定义代码块。滚动列表到最下面，你将看到刚刚新建的代码片段，如下图</p>
+
+<p><img src="/images/post/2015-07-16-xcodedai-ma-pian-duan/snippets-1.jpg" alt="snippets-1" /></p>
+
+<p>双击刚刚新建的代码片段”My Code Snippet”，在弹出窗口中点”Edit”按钮</p>
+
+<p><img src="/images/post/2015-07-16-xcodedai-ma-pian-duan/snippets-2.jpg" alt="snippets-2" /></p>
+
+<p>然后分别输入<br />
+1. 代码片段的名称，比如：Table View Sections<br />
+2. 代码片段的快捷键，比如：tablesections<br />
+3. 占位符，比如：&lt;#number of section#&gt;</p>
+
+<p><img src="/images/post/2015-07-16-xcodedai-ma-pian-duan/snippets-3.jpg" alt="snippets-3" /></p>
+
+<p>然后在@implementation~@end块中输入tablesections，将弹出代码片段提示框，选中你想要的代码片段，按回车</p>
+
+<p><img src="/images/post/2015-07-16-xcodedai-ma-pian-duan/snippets-4.jpg" alt="snippets-4" /></p>
+
+<h1 id="github">保存代码片段到github</h1>
+
+<p>Xcode代码段默认保存在<code>~/Library/Developer/Xcode/UserData/CodeSnippets</code>目录下<br />
+首先登录github网站，新建一个代码仓库，比如我的代码仓库地址为https://github.com/photondragon/xcodesnippets<br />
+然后打开终端，输入如下指令：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">cd ~/Library/Developer/Xcode/UserData/CodeSnippets
+</span><span class="line">git init
+</span><span class="line">git remote add origin git@github.com:photondragon/xcodesnippets.git
+</span><span class="line">git push origin master</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h1 id="section-1">将代码片段部署到新机器上</h1>
+
+<p>打开终端，输入：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">mkdir -p ~/Library/Developer/Xcode/UserData/CodeSnippets
+</span><span class="line">cd ~/Library/Developer/Xcode/UserData/CodeSnippets
+</span><span class="line">git init
+</span><span class="line">git remote add origin https://github.com/photondragon/xcodesnippets.git
+</span><span class="line">git pull origin master</span></code></pre></td></tr></table></div></figure></notextile></div>
 </div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/articles/201507/xcodedai-ma-pian-duan">阅读全文</a>
-    </footer>
-  
 
 
-    </article>
-  
-  
-    <article>
+  <footer>
+    <p class="meta">
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/articles/201506/ce-shi">测试</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-06-21T03:27:25+08:00'><span class='date'>2015年6月21日</span> <span class='time'>3:27 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><ul id="markdown-toc">
-  <li><a href="#section" id="markdown-toc-section">一级标题1</a>    <ul>
-      <li><a href="#section-1" id="markdown-toc-section-1">二级标题11</a></li>
-      <li><a href="#section-2" id="markdown-toc-section-2">二级标题12</a>        <ul>
-          <li><a href="#section-3" id="markdown-toc-section-3">三级标题121</a></li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-</ul>
-
-<p>这是摘要部分
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/articles/201506/ce-shi">阅读全文</a>
-    </footer>
   
 
+<span class="byline author vcard"><span class="fn">photondragon</span></span>
 
-    </article>
-  
-  
-    <article>
       
-  <header>
+
+
+
+
+<time class='entry-date' datetime='2015-07-16T22:53:21+08:00'><span class='date'>2015年7月16日</span> <span class='time'>10:53 pm</span></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/categories/shi-yong-ji-qiao/'>实用技巧</a>
+  
+</span>
+
+
+    </p>
     
-      <h1 class="entry-title"><a href="/articles/201506/huan-ying">欢迎来到迷途老码的博客</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-06-18T00:51:59+08:00'><span class='date'>2015年6月18日</span> <span class='time'>12:51 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>欢迎来到迷途老码的博客</p>
+      <div class="sharing">
+  
+  
+  
 </div>
-  
-  
 
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/articles/201506/ce-shi" title="Previous Post: 测试">&laquo; 测试</a>
+      
+      
+    </p>
+  </footer>
+</article>
 
-    </article>
-  
-  <div class="pagination">
-    
-    <a href="/archives">查看全部文章</a>
-    
-  </div>
 </div>
+
 <aside class="sidebar">
   
     <section>
@@ -251,6 +255,7 @@ var _hmt = _hmt || [];
 
   
 </aside>
+
 
     </div>
   </div>

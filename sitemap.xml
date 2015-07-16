@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>http://blog.iosdev.net/articles/201506/xian-shi-tu-pian-de-ioscheng-xu-wei-shi-yao-hui-qia-dun-%3F</loc>
-    <lastmod>2015-06-30T00:38:01+08:00</lastmod>
+    <loc>http://blog.iosdev.net/articles/201507/xcodedai-ma-pian-duan</loc>
+    <lastmod>2015-07-16T22:53:21+08:00</lastmod>
   </url>
   <url>
     <loc>http://blog.iosdev.net/articles/201506/ce-shi</loc>
@@ -20,5 +20,8 @@
   </url>
   <url>
     <loc>http://blog.iosdev.net/categories/za-xiang/</loc>
+  </url>
+  <url>
+    <loc>http://blog.iosdev.net/categories/shi-yong-ji-qiao/</loc>
   </url>
 </urlset>

@@ -4,7 +4,7 @@
   <title><![CDATA[迷途老码的博客]]></title>
   <link href="http://blog.iosdev.net/atom.xml" rel="self"/>
   <link href="http://blog.iosdev.net/"/>
-  <updated>2015-07-11T15:12:50+08:00</updated>
+  <updated>2015-07-17T00:32:20+08:00</updated>
   <id>http://blog.iosdev.net/</id>
   <author>
     <name><![CDATA[photondragon]]></name>
@@ -14,29 +14,64 @@
 
   
   <entry>
-    <title type="html"><![CDATA[显示图片的ios程序为什么会卡顿？]]></title>
-    <link href="http://blog.iosdev.net/articles/201506/xian-shi-tu-pian-de-ioscheng-xu-wei-shi-yao-hui-qia-dun-%3F"/>
-    <updated>2015-06-30T00:38:01+08:00</updated>
-    <id>http://blog.iosdev.net/articles/201506/xian-shi-tu-pian-de-ioscheng-xu-wei-shi-yao-hui-qia-dun-?</id>
-    <content type="html"><![CDATA[<p>在ios开发中，加载显示图片尤其是网络图片，大家首先想到的就是SDWebImage，那么这个库的背后的原理是什么？
-或者说程序显示图片卡顿的原因是什么？很多人会说是因为从网络或者从硬盘上读取图片慢啊</p>
+    <title type="html"><![CDATA[Xcode代码片段]]></title>
+    <link href="http://blog.iosdev.net/articles/201507/xcodedai-ma-pian-duan"/>
+    <updated>2015-07-16T22:53:21+08:00</updated>
+    <id>http://blog.iosdev.net/articles/201507/xcodedai-ma-pian-duan</id>
+    <content type="html"><![CDATA[<p>代码片段Snippets主要用于加速度代码的输入速度。通过把常用的代码设置为Snippet，并分配一个简短的快捷字符串，程序员只需要输入这个快捷字符串，再按下tab键，xcode就会自动帮你输入预设的代码段。</p>
 
-<p>使用多线程，把下载图片、读取图片的操作放到后台线程执行。</p>
+<!--more-->
 
-<p>图片显示过程：
-读取：将图像文件从磁盘读入内存
-解码：将jpg,png等格式的图像解码成原始的RGBA数据
-显示：将图像在屏幕上显示出来</p>
+<h1 id="section">创建代码段</h1>
 
-<p>读取图像示例：
-UIImage* image = [UIImage imageNamed:@”loading.jpg”];
-UIImage* img = [UIImage imageWithContentsOfFile:imgfile];//从磁盘读取图像</p>
+<p>选中一段代码，然后拖到右下角的Code Snippet Library窗口中，将创建一个自定义代码块。滚动列表到最下面，你将看到刚刚新建的代码片段，如下图</p>
 
-<p>解码图像
-Apple没有直接提供图像解码的API接口，但可以通过一些技巧来得到解码后的图像，过程如下：
-创建一个图像缓冲区，CGBitmapContextCreate()
-将原始图像绘制到这个缓冲区中，CGContextDrawImage()
-利用缓冲区内容创建一个新的图像，CGBitmapContextCreateImage()</p>
+<p><img src="http://blog.iosdev.net/images/post/2015-07-16-xcodedai-ma-pian-duan/snippets-1.jpg" alt="snippets-1" /></p>
+
+<p>双击刚刚新建的代码片段”My Code Snippet”，在弹出窗口中点”Edit”按钮</p>
+
+<p><img src="http://blog.iosdev.net/images/post/2015-07-16-xcodedai-ma-pian-duan/snippets-2.jpg" alt="snippets-2" /></p>
+
+<p>然后分别输入<br />
+1. 代码片段的名称，比如：Table View Sections<br />
+2. 代码片段的快捷键，比如：tablesections<br />
+3. 占位符，比如：&lt;#number of section#&gt;</p>
+
+<p><img src="http://blog.iosdev.net/images/post/2015-07-16-xcodedai-ma-pian-duan/snippets-3.jpg" alt="snippets-3" /></p>
+
+<p>然后在@implementation~@end块中输入tablesections，将弹出代码片段提示框，选中你想要的代码片段，按回车</p>
+
+<p><img src="http://blog.iosdev.net/images/post/2015-07-16-xcodedai-ma-pian-duan/snippets-4.jpg" alt="snippets-4" /></p>
+
+<h1 id="github">保存代码片段到github</h1>
+
+<p>Xcode代码段默认保存在<code>~/Library/Developer/Xcode/UserData/CodeSnippets</code>目录下<br />
+首先登录github网站，新建一个代码仓库，比如我的代码仓库地址为https://github.com/photondragon/xcodesnippets<br />
+然后打开终端，输入如下指令：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">cd ~/Library/Developer/Xcode/UserData/CodeSnippets
+</span><span class="line">git init
+</span><span class="line">git remote add origin git@github.com:photondragon/xcodesnippets.git
+</span><span class="line">git push origin master</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h1 id="section-1">将代码片段部署到新机器上</h1>
+
+<p>打开终端，输入：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">mkdir -p ~/Library/Developer/Xcode/UserData/CodeSnippets
+</span><span class="line">cd ~/Library/Developer/Xcode/UserData/CodeSnippets
+</span><span class="line">git init
+</span><span class="line">git remote add origin https://github.com/photondragon/xcodesnippets.git
+</span><span class="line">git pull origin master</span></code></pre></td></tr></table></div></figure></notextile></div>
 ]]></content>
   </entry>
   
