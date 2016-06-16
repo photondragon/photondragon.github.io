@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[分类: 源码共享 | 迷途老码的博客]]></title>
-  <link href="http://blog.iosdev.net/categories/yuan-ma-gong-xiang/atom.xml" rel="self"/>
+  <title><![CDATA[分类: 源码分享 | 迷途老码的博客]]></title>
+  <link href="http://blog.iosdev.net/categories/yuan-ma-fen-xiang/atom.xml" rel="self"/>
   <link href="http://blog.iosdev.net/"/>
-  <updated>2016-06-17T06:57:14+08:00</updated>
+  <updated>2016-06-17T06:59:44+08:00</updated>
   <id>http://blog.iosdev.net/</id>
   <author>
     <name><![CDATA[photondragon]]></name>
