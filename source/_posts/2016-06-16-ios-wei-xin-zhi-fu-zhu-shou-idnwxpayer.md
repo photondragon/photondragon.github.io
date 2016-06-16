@@ -3,7 +3,7 @@ layout: post
 title: "iOS 微信支付助手 IDNWxPayer"
 date: 2016-06-16 23:04:20 +0800
 comments: true
-categories: 共享代码
+categories: 源码共享
 ---
 
 demo示例程序 <https://github.com/photondragon/IDNWxPaySample>  
@@ -13,6 +13,8 @@ IDNWxPayer 对微信支付ios端的整个支付流程进行了封装，把复杂
 ![方法列表](http://res.iosdev.net/images/post/2016-06-16-ios-wei-xin-zhi-fu-zhu-shou-idnwxpayer/20160616-methods.jpg)  
 必定要调用的“核心方法”有三个，实际发起支付的方法就一个，其它的所谓“不安全操作”的方法只有在服务端开发没有完成的情况下才有必要使用。  
 全部的代码都封装在两个源文件中，IDNWxPayer.h 和 IDNWxPayer.m ，除了微信官方提供的SDK库以外，不依赖任何第三方库。
+
+<!--more-->
 
 如果你发现了任何bug，欢迎[提交Issues](https://github.com/photondragon/IDNWxPaySample/issues "提交Issues")
 
@@ -24,11 +26,11 @@ IDNWxPayer 对微信支付ios端的整个支付流程进行了封装，把复杂
 
 1. 创建一个全新的xcode项目，加入源文件 IDNWxPayer.h 和 IDNWxPayer.m
 2. 下载 [微信支付官方SDK](https://res.wx.qq.com/open/zh_CN/htmledition/res/dev/download/sdk/WeChatSDK1.7.1.zip "微信支付官方SDK") ，把解压出来的文件夹 OpenSDK1.7.1 整个加入项目中
-3. 为项目添加 URL Schemes = <你的微信支付的appId>
+3. 为项目添加 URL Schemes = <你的微信支付的appId>  
 	![设置URL Schemes](http://res.iosdev.net/images/post/2016-06-16-ios-wei-xin-zhi-fu-zhu-shou-idnwxpayer/20160616-urlSchemes.jpg)
-4. 链接这几个库: libc++.tdb, libsqlite3.tbd, libz.tbd, CoreTelephony.framework, SystemConfiguration.framework
+4. 链接这几个库: libc++.tdb, libsqlite3.tbd, libz.tbd, CoreTelephony.framework, SystemConfiguration.framework  
 	![链接库](http://res.iosdev.net/images/post/2016-06-16-ios-wei-xin-zhi-fu-zhu-shou-idnwxpayer/20160616-link-libs.png)
-5. 在 AppDelegate.m 中加入初始化代码，**注意要把初始化参数换成你自己的**
+5. 在 AppDelegate.m 中加入初始化代码，**注意要把初始化参数换成你自己的**  
 
     ``` objective-c
     #import "IDNWxPayer.h"
