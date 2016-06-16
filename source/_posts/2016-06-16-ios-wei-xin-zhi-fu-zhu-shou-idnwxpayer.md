@@ -26,7 +26,7 @@ IDNWxPayer 对微信支付ios端的整个支付流程进行了封装，把复杂
 
 1. 创建一个全新的xcode项目，加入源文件 IDNWxPayer.h 和 IDNWxPayer.m
 2. 下载 [微信支付官方SDK](https://res.wx.qq.com/open/zh_CN/htmledition/res/dev/download/sdk/WeChatSDK1.7.1.zip "微信支付官方SDK") ，把解压出来的文件夹 OpenSDK1.7.1 整个加入项目中
-3. 为项目添加 URL Schemes = <你的微信支付的appId>  
+3. 为项目添加 URL Schemes = \<你的微信支付的appId\>  
 	![设置URL Schemes](http://res.iosdev.net/images/post/2016-06-16-ios-wei-xin-zhi-fu-zhu-shou-idnwxpayer/20160616-urlSchemes.jpg)
 4. 链接这几个库: libc++.tdb, libsqlite3.tbd, libz.tbd, CoreTelephony.framework, SystemConfiguration.framework  
 	![链接库](http://res.iosdev.net/images/post/2016-06-16-ios-wei-xin-zhi-fu-zhu-shou-idnwxpayer/20160616-link-libs.png)
