@@ -32,7 +32,7 @@ IDNWxPayer 对微信支付ios端的整个支付流程进行了封装，把复杂
 	![链接库](http://res.iosdev.net/images/post/2016-06-16-ios-wei-xin-zhi-fu-zhu-shou-idnwxpayer/20160616-link-libs.png)
 5. 在 AppDelegate.m 中加入初始化代码，**注意要把初始化参数换成你自己的**
 
-```
+``` objective-c
 #import "IDNWxPayer.h"
 
 // 。。。其它代码。。。
