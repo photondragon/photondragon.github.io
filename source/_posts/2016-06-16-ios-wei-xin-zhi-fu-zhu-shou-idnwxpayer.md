@@ -3,7 +3,7 @@ layout: post
 title: "iOS 微信支付助手 IDNWxPayer"
 date: 2016-06-16 23:04:20 +0800
 comments: true
-categories: 源码共享
+categories: 源码分享
 ---
 
 demo示例程序 <https://github.com/photondragon/IDNWxPaySample>  
