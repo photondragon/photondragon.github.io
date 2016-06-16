@@ -9,8 +9,7 @@
   <meta name="author" content="photondragon">
 
   
-  <meta name="description" content="iOS 微信支付助手 IDNWxPayer demo示例程序 https://github.com/photondragon/IDNWxPaySample
-示例程序要想正常运行，需要修改项目的 URL Schemes 和application: &hellip;">
+  <meta name="description" content="demo示例程序 https://github.com/photondragon/IDNWxPaySample 示例程序要想正常运行，需要修改项目的 URL Schemes 和application:didFinishLaunchingWithOptions: 中的微信支付的初始化参数（参考后面的 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -133,14 +132,12 @@ var _hmt = _hmt || [];
   </header>
 
 
-<div class="entry-content"><h1 id="ios--idnwxpayer">iOS 微信支付助手 IDNWxPayer</h1>
-
-<p>demo示例程序 <a href="https://github.com/photondragon/IDNWxPaySample">https://github.com/photondragon/IDNWxPaySample</a><br />
+<div class="entry-content"><p>demo示例程序 <a href="https://github.com/photondragon/IDNWxPaySample">https://github.com/photondragon/IDNWxPaySample</a>  <br />
 示例程序要想正常运行，需要修改项目的 URL Schemes 和application:didFinishLaunchingWithOptions: 中的微信支付的初始化参数（参考后面的“项目准备”一节）</p>
 
-<p>IDNWxPayer 对微信支付ios端的整个支付流程进行了封装，把复杂的细节都屏蔽掉了，对外提供了简单易用的接口（全部都是+方法），下图列出了提供的接口方法：<br />
-<img src="http://res.iosdev.net/images/post/2016-06-16-ios-wei-xin-zhi-fu-zhu-shou-idnwxpayer/20160616-methods.jpg" alt="方法列表" /><br />
-必定要调用的“核心方法”有三个，实际发起支付的方法就一个，其它的所谓“不安全操作”的方法只有在服务端开发没有完成的情况下才有必要使用。<br />
+<p>IDNWxPayer 对微信支付ios端的整个支付流程进行了封装，把复杂的细节都屏蔽掉了，对外提供了简单易用的接口（全部都是+方法），下图列出了提供的接口方法：  <br />
+<img src="http://res.iosdev.net/images/post/2016-06-16-ios-wei-xin-zhi-fu-zhu-shou-idnwxpayer/20160616-methods.jpg" alt="方法列表" />  <br />
+必定要调用的“核心方法”有三个，实际发起支付的方法就一个，其它的所谓“不安全操作”的方法只有在服务端开发没有完成的情况下才有必要使用。  <br />
 全部的代码都封装在两个源文件中，IDNWxPayer.h 和 IDNWxPayer.m ，除了微信官方提供的SDK库以外，不依赖任何第三方库。</p>
 
 <p>如果你发现了任何bug，欢迎<a href="https://github.com/photondragon/IDNWxPaySample/issues" title="提交Issues">提交Issues</a></p>
@@ -156,12 +153,12 @@ var _hmt = _hmt || [];
   <li>下载 <a href="https://res.wx.qq.com/open/zh_CN/htmledition/res/dev/download/sdk/WeChatSDK1.7.1.zip" title="微信支付官方SDK">微信支付官方SDK</a> ，把解压出来的文件夹 OpenSDK1.7.1 整个加入项目中</li>
   <li>为项目添加 URL Schemes = <你的微信支付的appid>
  ![设置URL Schemes](http://res.iosdev.net/images/post/2016-06-16-ios-wei-xin-zhi-fu-zhu-shou-idnwxpayer/20160616-urlSchemes.jpg)</你的微信支付的appid></li>
-  <li>链接这几个库: libc++.tdb, libsqlite3.tbd, libz.tbd, CoreTelephony.framework, SystemConfiguration.framework
+  <li>链接这几个库: libc++.tdb, libsqlite3.tbd, libz.tbd, CoreTelephony.framework, SystemConfiguration.framework<br />
  <img src="http://res.iosdev.net/images/post/2016-06-16-ios-wei-xin-zhi-fu-zhu-shou-idnwxpayer/20160616-link-libs.png" alt="链接库" /></li>
   <li>
     <p>在 AppDelegate.m 中加入初始化代码，<strong>注意要把初始化参数换成你自己的</strong></p>
 
-    <p>``` objective-c
+    <p>``` objective-c<br />
  #import “IDNWxPayer.h”</p>
 
     <p>// 。。。其它代码。。。</p>
@@ -170,29 +167,29 @@ var _hmt = _hmt || [];
       <li>
         <p>(BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {</p>
 
-        <p>[IDNWxPayer initWithAppId:@”wx1234567812345678” merchantId:@”1234567890”]; //
-  [IDNWxPayer setMerchantKey:@”12345678901234567890123456789012”]; //设置商户密钥，仅供测试使用
+        <p>[IDNWxPayer initWithAppId:@”wx1234567812345678” merchantId:@”1234567890”]; //<br />
+  [IDNWxPayer setMerchantKey:@”12345678901234567890123456789012”]; //设置商户密钥，仅供测试使用<br />
   [IDNWxPayer setNotifyUrl:@”http://www.example.com/wxnotify.php”]; //仅供测试使用</p>
 
-        <p>return YES;
+        <p>return YES;<br />
  }</p>
       </li>
     </ul>
 
-    <p>// ios &lt; 9.0
- - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
- {
-     if([IDNWxPayer handleOpenURL:url]) //处理从微信客户端跳转回来的url。返回 TRUE 表示成功处理了
-         return YES;
-     return NO;
+    <p>// ios &lt; 9.0<br />
+ - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation<br />
+ {<br />
+     if([IDNWxPayer handleOpenURL:url]) //处理从微信客户端跳转回来的url。返回 TRUE 表示成功处理了<br />
+         return YES;<br />
+     return NO;<br />
  }</p>
 
-    <p>// ios &gt;= 9.0
- - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url options:(NSDictionary&lt;NSString *,id&gt; *)options
- {
-     if([IDNWxPayer handleOpenURL:url]) //处理从微信客户端跳转回来的url。返回 TRUE 表示成功处理了
-         return YES;
-     return NO;
+    <p>// ios &gt;= 9.0<br />
+ - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url options:(NSDictionary&lt;NSString *,id&gt; *)options<br />
+ {<br />
+     if([IDNWxPayer handleOpenURL:url]) //处理从微信客户端跳转回来的url。返回 TRUE 表示成功处理了<br />
+         return YES;<br />
+     return NO;<br />
  }</p>
 
     <p>```</p>
@@ -263,7 +260,7 @@ var _hmt = _hmt || [];
 
 <h4 id="section-6">情况3😠</h4>
 
-<p>如果你们的服务端小伙伴连微信支付流程的第1步都还没搞定😠，怎么办呢？当然有办法，我们可以自己向微信服务器下单（前提是在初始化的时候设置了merchantKey和notifyUrl）。<br />
+<p>如果你们的服务端小伙伴连微信支付流程的第1步都还没搞定😠，怎么办呢？当然有办法，我们可以自己向微信服务器下单（前提是在初始化的时候设置了merchantKey和notifyUrl）。  <br />
 先调用 +prepayWithOrderId:amount:orderTitle:orderDetail:callback: 方法下单（参数你就随便填吧，反正只是测试），下单成功后通过 callback 得到支付请求参数，再调用 +payWithParams:result: 发起支付，示例代码如下：</p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
@@ -315,6 +312,12 @@ var _hmt = _hmt || [];
 <time class='entry-date' datetime='2016-06-16T23:04:20+08:00'><span class='date'>2016年6月16日</span> <span class='time'>11:04 pm</span></time>
       
 
+<span class="categories">
+  
+    <a class='category' href='/categories/gong-xiang-dai-ma/'>共享代码</a>
+  
+</span>
+
 
     </p>
     
@@ -363,7 +366,8 @@ var _hmt = _hmt || [];
 <section>
   <h1>分类目录</h1>
   <ul id="categories">
-    <li class='category'><a href='/categories/shi-yong-ji-qiao/'>实用技巧 (1)</a></li>
+    <li class='category'><a href='/categories/gong-xiang-dai-ma/'>共享代码 (1)</a></li>
+<li class='category'><a href='/categories/shi-yong-ji-qiao/'>实用技巧 (1)</a></li>
 <li class='category'><a href='/categories/za-xiang/'>杂项 (2)</a></li>
 
   </ul>

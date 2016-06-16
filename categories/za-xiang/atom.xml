@@ -4,7 +4,7 @@
   <title><![CDATA[分类: 杂项 | 迷途老码的博客]]></title>
   <link href="http://blog.iosdev.net/categories/za-xiang/atom.xml" rel="self"/>
   <link href="http://blog.iosdev.net/"/>
-  <updated>2016-06-17T05:00:55+08:00</updated>
+  <updated>2016-06-17T05:35:31+08:00</updated>
   <id>http://blog.iosdev.net/</id>
   <author>
     <name><![CDATA[photondragon]]></name>
@@ -29,7 +29,7 @@
   </li>
 </ul>
 
-<p>这是摘要部分
+<p>这是摘要部分<br />
 <!--more--></p>
 
 <h1 id="section">一级标题1</h1>
@@ -52,13 +52,15 @@
 <span class='line-number'>5</span>
 <span class='line-number'>6</span>
 <span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="cp">#import &amp;lt;UIKit/UIKit.h&amp;gt;&lt;/p&gt;</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="o">&lt;</span><span class="n">br</span> <span class="o">/&gt;</span>
+</span><span class='line'><span class="cp">#import &amp;lt;UIKit/UIKit.h&amp;gt;&lt;/p&gt;</span>
 </span><span class='line'>
 </span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="k">@interface</span> <span class="bp">UIView</span><span class="nl">(IDNKeyboard)</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
 </span><span class='line'>
 </span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="k">@property</span><span class="p">(</span><span class="k">nonatomic</span><span class="p">,</span><span class="k">strong</span><span class="p">)</span> <span class="kt">void</span> <span class="p">(</span><span class="o">^</span><span class="n">keyboardFrameWillChangeBlock</span><span class="p">)(</span><span class="n">CGFloat</span> <span class="n">bottomDistance</span><span class="p">,</span> <span class="kt">double</span> <span class="n">animationDuration</span><span class="p">,</span> <span class="n">UIViewAnimationCurve</span> <span class="n">animationCurve</span><span class="p">);</span> <span class="c1">//当键盘Frame改变时此Block被调用。bottomDistance是键盘顶部与self视图底部的距离；animationDuration是键盘动画持续时间&lt;/p&gt;</span>
 </span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="k">@end</span>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="k">@end</span><span class="o">&lt;</span><span class="n">br</span> <span class="o">/&gt;</span>
 </span></code></pre></td></tr></table></div></figure></p>
 
 <pre lang="ruby"><code>def hello

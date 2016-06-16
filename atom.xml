@@ -4,7 +4,7 @@
   <title><![CDATA[迷途老码的博客]]></title>
   <link href="http://blog.iosdev.net/atom.xml" rel="self"/>
   <link href="http://blog.iosdev.net/"/>
-  <updated>2016-06-17T05:00:55+08:00</updated>
+  <updated>2016-06-17T05:35:31+08:00</updated>
   <id>http://blog.iosdev.net/</id>
   <author>
     <name><![CDATA[photondragon]]></name>
@@ -18,14 +18,12 @@
     <link href="http://blog.iosdev.net/articles/201606/ios-wei-xin-zhi-fu-zhu-shou-idnwxpayer"/>
     <updated>2016-06-16T23:04:20+08:00</updated>
     <id>http://blog.iosdev.net/articles/201606/ios-wei-xin-zhi-fu-zhu-shou-idnwxpayer</id>
-    <content type="html"><![CDATA[<h1 id="ios--idnwxpayer">iOS 微信支付助手 IDNWxPayer</h1>
-
-<p>demo示例程序 <a href="https://github.com/photondragon/IDNWxPaySample">https://github.com/photondragon/IDNWxPaySample</a><br />
+    <content type="html"><![CDATA[<p>demo示例程序 <a href="https://github.com/photondragon/IDNWxPaySample">https://github.com/photondragon/IDNWxPaySample</a>  <br />
 示例程序要想正常运行，需要修改项目的 URL Schemes 和application:didFinishLaunchingWithOptions: 中的微信支付的初始化参数（参考后面的“项目准备”一节）</p>
 
-<p>IDNWxPayer 对微信支付ios端的整个支付流程进行了封装，把复杂的细节都屏蔽掉了，对外提供了简单易用的接口（全部都是+方法），下图列出了提供的接口方法：<br />
-<img src="http://res.iosdev.net/images/post/2016-06-16-ios-wei-xin-zhi-fu-zhu-shou-idnwxpayer/20160616-methods.jpg" alt="方法列表" /><br />
-必定要调用的“核心方法”有三个，实际发起支付的方法就一个，其它的所谓“不安全操作”的方法只有在服务端开发没有完成的情况下才有必要使用。<br />
+<p>IDNWxPayer 对微信支付ios端的整个支付流程进行了封装，把复杂的细节都屏蔽掉了，对外提供了简单易用的接口（全部都是+方法），下图列出了提供的接口方法：  <br />
+<img src="http://res.iosdev.net/images/post/2016-06-16-ios-wei-xin-zhi-fu-zhu-shou-idnwxpayer/20160616-methods.jpg" alt="方法列表" />  <br />
+必定要调用的“核心方法”有三个，实际发起支付的方法就一个，其它的所谓“不安全操作”的方法只有在服务端开发没有完成的情况下才有必要使用。  <br />
 全部的代码都封装在两个源文件中，IDNWxPayer.h 和 IDNWxPayer.m ，除了微信官方提供的SDK库以外，不依赖任何第三方库。</p>
 
 <p>如果你发现了任何bug，欢迎<a href="https://github.com/photondragon/IDNWxPaySample/issues" title="提交Issues">提交Issues</a></p>
@@ -41,12 +39,12 @@
   <li>下载 <a href="https://res.wx.qq.com/open/zh_CN/htmledition/res/dev/download/sdk/WeChatSDK1.7.1.zip" title="微信支付官方SDK">微信支付官方SDK</a> ，把解压出来的文件夹 OpenSDK1.7.1 整个加入项目中</li>
   <li>为项目添加 URL Schemes = <你的微信支付的appid>
  ![设置URL Schemes](http://res.iosdev.net/images/post/2016-06-16-ios-wei-xin-zhi-fu-zhu-shou-idnwxpayer/20160616-urlSchemes.jpg)</你的微信支付的appid></li>
-  <li>链接这几个库: libc++.tdb, libsqlite3.tbd, libz.tbd, CoreTelephony.framework, SystemConfiguration.framework
+  <li>链接这几个库: libc++.tdb, libsqlite3.tbd, libz.tbd, CoreTelephony.framework, SystemConfiguration.framework<br />
  <img src="http://res.iosdev.net/images/post/2016-06-16-ios-wei-xin-zhi-fu-zhu-shou-idnwxpayer/20160616-link-libs.png" alt="链接库" /></li>
   <li>
     <p>在 AppDelegate.m 中加入初始化代码，<strong>注意要把初始化参数换成你自己的</strong></p>
 
-    <p>``` objective-c
+    <p>``` objective-c<br />
  #import “IDNWxPayer.h”</p>
 
     <p>// 。。。其它代码。。。</p>
@@ -55,29 +53,29 @@
       <li>
         <p>(BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {</p>
 
-        <p>[IDNWxPayer initWithAppId:@”wx1234567812345678” merchantId:@”1234567890”]; //
-  [IDNWxPayer setMerchantKey:@”12345678901234567890123456789012”]; //设置商户密钥，仅供测试使用
+        <p>[IDNWxPayer initWithAppId:@”wx1234567812345678” merchantId:@”1234567890”]; //<br />
+  [IDNWxPayer setMerchantKey:@”12345678901234567890123456789012”]; //设置商户密钥，仅供测试使用<br />
   [IDNWxPayer setNotifyUrl:@”http://www.example.com/wxnotify.php”]; //仅供测试使用</p>
 
-        <p>return YES;
+        <p>return YES;<br />
  }</p>
       </li>
     </ul>
 
-    <p>// ios &lt; 9.0
- - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
- {
-     if([IDNWxPayer handleOpenURL:url]) //处理从微信客户端跳转回来的url。返回 TRUE 表示成功处理了
-         return YES;
-     return NO;
+    <p>// ios &lt; 9.0<br />
+ - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation<br />
+ {<br />
+     if([IDNWxPayer handleOpenURL:url]) //处理从微信客户端跳转回来的url。返回 TRUE 表示成功处理了<br />
+         return YES;<br />
+     return NO;<br />
  }</p>
 
-    <p>// ios &gt;= 9.0
- - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url options:(NSDictionary&lt;NSString *,id&gt; *)options
- {
-     if([IDNWxPayer handleOpenURL:url]) //处理从微信客户端跳转回来的url。返回 TRUE 表示成功处理了
-         return YES;
-     return NO;
+    <p>// ios &gt;= 9.0<br />
+ - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url options:(NSDictionary&lt;NSString *,id&gt; *)options<br />
+ {<br />
+     if([IDNWxPayer handleOpenURL:url]) //处理从微信客户端跳转回来的url。返回 TRUE 表示成功处理了<br />
+         return YES;<br />
+     return NO;<br />
  }</p>
 
     <p>```</p>
@@ -148,7 +146,7 @@
 
 <h4 id="section-6">情况3😠</h4>
 
-<p>如果你们的服务端小伙伴连微信支付流程的第1步都还没搞定😠，怎么办呢？当然有办法，我们可以自己向微信服务器下单（前提是在初始化的时候设置了merchantKey和notifyUrl）。<br />
+<p>如果你们的服务端小伙伴连微信支付流程的第1步都还没搞定😠，怎么办呢？当然有办法，我们可以自己向微信服务器下单（前提是在初始化的时候设置了merchantKey和notifyUrl）。  <br />
 先调用 +prepayWithOrderId:amount:orderTitle:orderDetail:callback: 方法下单（参数你就随便填吧，反正只是测试），下单成功后通过 callback 得到支付请求参数，再调用 +payWithParams:result: 发起支付，示例代码如下：</p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
@@ -194,7 +192,7 @@
 
 <!--more-->
 
-<h1 id="section">创建代码段</h1>
+<p>#创建代码段</p>
 
 <p>选中一段代码，然后拖到右下角的Code Snippet Library窗口中，将创建一个自定义代码块。滚动列表到最下面，你将看到刚刚新建的代码片段，如下图</p>
 
@@ -204,9 +202,9 @@
 
 <p><img src="http://blog.iosdev.net/images/post/2015-07-16-xcodedai-ma-pian-duan/snippets-2.jpg" alt="snippets-2" /></p>
 
-<p>然后分别输入<br />
-1. 代码片段的名称，比如：Table View Sections<br />
-2. 代码片段的快捷键，比如：tablesections<br />
+<p>然后分别输入  <br />
+1. 代码片段的名称，比如：Table View Sections  <br />
+2. 代码片段的快捷键，比如：tablesections  <br />
 3. 占位符，比如：&lt;#number of section#&gt;</p>
 
 <p><img src="http://blog.iosdev.net/images/post/2015-07-16-xcodedai-ma-pian-duan/snippets-3.jpg" alt="snippets-3" /></p>
@@ -215,10 +213,10 @@
 
 <p><img src="http://blog.iosdev.net/images/post/2015-07-16-xcodedai-ma-pian-duan/snippets-4.jpg" alt="snippets-4" /></p>
 
-<h1 id="github">保存代码片段到github</h1>
+<p>#保存代码片段到github</p>
 
-<p>Xcode代码段默认保存在<code>~/Library/Developer/Xcode/UserData/CodeSnippets</code>目录下<br />
-首先登录github网站，新建一个代码仓库，比如我的代码仓库地址为https://github.com/photondragon/xcodesnippets<br />
+<p>Xcode代码段默认保存在<code>~/Library/Developer/Xcode/UserData/CodeSnippets</code>目录下  <br />
+首先登录github网站，新建一个代码仓库，比如我的代码仓库地址为https://github.com/photondragon/xcodesnippets  <br />
 然后打开终端，输入如下指令：</p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
@@ -230,7 +228,7 @@
 </span><span class="line">git remote add origin git@github.com:photondragon/xcodesnippets.git
 </span><span class="line">git push origin master</span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<h1 id="section-1">将代码片段部署到新机器上</h1>
+<p>#将代码片段部署到新机器上</p>
 
 <p>打开终端，输入：</p>
 
@@ -263,7 +261,7 @@
   </li>
 </ul>
 
-<p>这是摘要部分
+<p>这是摘要部分<br />
 <!--more--></p>
 
 <h1 id="section">一级标题1</h1>
