@@ -4,7 +4,7 @@
   <title><![CDATA[分类: 源码共享 | 迷途老码的博客]]></title>
   <link href="http://blog.iosdev.net/categories/yuan-ma-gong-xiang/atom.xml" rel="self"/>
   <link href="http://blog.iosdev.net/"/>
-  <updated>2016-06-17T06:45:27+08:00</updated>
+  <updated>2016-06-17T06:51:15+08:00</updated>
   <id>http://blog.iosdev.net/</id>
   <author>
     <name><![CDATA[photondragon]]></name>
@@ -43,46 +43,39 @@
  <img src="http://res.iosdev.net/images/post/2016-06-16-ios-wei-xin-zhi-fu-zhu-shou-idnwxpayer/20160616-urlSchemes.jpg" alt="设置URL Schemes" /></li>
   <li>链接这几个库: libc++.tdb, libsqlite3.tbd, libz.tbd, CoreTelephony.framework, SystemConfiguration.framework  <br />
  <img src="http://res.iosdev.net/images/post/2016-06-16-ios-wei-xin-zhi-fu-zhu-shou-idnwxpayer/20160616-link-libs.png" alt="链接库" /></li>
-  <li>
-    <p>在 AppDelegate.m 中加入初始化代码，<strong>注意要把初始化参数换成你自己的</strong></p>
-
-    <p>```<br />
- #import “IDNWxPayer.h”</p>
-
-    <p>// 。。。其它代码。。。</p>
-
-    <ul>
-      <li>
-        <p>(BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {</p>
-
-        <p>[IDNWxPayer initWithAppId:@”wx1234567812345678” merchantId:@”1234567890”]; //<br />
-  [IDNWxPayer setMerchantKey:@”12345678901234567890123456789012”]; //设置商户密钥，仅供测试使用<br />
-  [IDNWxPayer setNotifyUrl:@”http://www.example.com/wxnotify.php”]; //仅供测试使用</p>
-
-        <p>return YES;<br />
- }</p>
-      </li>
-    </ul>
-
-    <p>// ios &lt; 9.0<br />
- - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation<br />
- {<br />
-     if([IDNWxPayer handleOpenURL:url]) //处理从微信客户端跳转回来的url。返回 TRUE 表示成功处理了<br />
-         return YES;<br />
-     return NO;<br />
- }</p>
-
-    <p>// ios &gt;= 9.0<br />
- - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url options:(NSDictionary&lt;NSString *,id&gt; *)options<br />
- {<br />
-     if([IDNWxPayer handleOpenURL:url]) //处理从微信客户端跳转回来的url。返回 TRUE 表示成功处理了<br />
-         return YES;<br />
-     return NO;<br />
- }</p>
-
-    <p>```</p>
-  </li>
+  <li>在 AppDelegate.m 中加入初始化代码，<strong>注意要把初始化参数换成你自己的</strong></li>
 </ol>
+
+<pre><code>#import "IDNWxPayer.h"
+
+// 。。。其它代码。。。
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+	
+	[IDNWxPayer initWithAppId:@"wx1234567812345678" merchantId:@"1234567890"]; //
+	[IDNWxPayer setMerchantKey:@"12345678901234567890123456789012"]; //设置商户密钥，仅供测试使用
+	[IDNWxPayer setNotifyUrl:@"http://www.example.com/wxnotify.php"]; //仅供测试使用
+	
+	return YES;
+}
+
+// ios &lt; 9.0
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+	if([IDNWxPayer handleOpenURL:url]) //处理从微信客户端跳转回来的url。返回 TRUE 表示成功处理了
+		return YES;
+	return NO;
+}
+	
+// ios &gt;= 9.0
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url options:(NSDictionary&lt;NSString *,id&gt; *)options
+{
+	if([IDNWxPayer handleOpenURL:url]) //处理从微信客户端跳转回来的url。返回 TRUE 表示成功处理了
+		return YES;
+	return NO;
+}
+
+</code></pre>
 
 <p>现在你可以开始编写支付代码了，不过在这之前，最好先了解一下微信支付流程</p>
 

@@ -157,46 +157,66 @@ var _hmt = _hmt || [];
  <img src="http://res.iosdev.net/images/post/2016-06-16-ios-wei-xin-zhi-fu-zhu-shou-idnwxpayer/20160616-urlSchemes.jpg" alt="设置URL Schemes" /></li>
   <li>链接这几个库: libc++.tdb, libsqlite3.tbd, libz.tbd, CoreTelephony.framework, SystemConfiguration.framework  <br />
  <img src="http://res.iosdev.net/images/post/2016-06-16-ios-wei-xin-zhi-fu-zhu-shou-idnwxpayer/20160616-link-libs.png" alt="链接库" /></li>
-  <li>
-    <p>在 AppDelegate.m 中加入初始化代码，<strong>注意要把初始化参数换成你自己的</strong></p>
-
-    <p>```<br />
- #import “IDNWxPayer.h”</p>
-
-    <p>// 。。。其它代码。。。</p>
-
-    <ul>
-      <li>
-        <p>(BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {</p>
-
-        <p>[IDNWxPayer initWithAppId:@”wx1234567812345678” merchantId:@”1234567890”]; //<br />
-  [IDNWxPayer setMerchantKey:@”12345678901234567890123456789012”]; //设置商户密钥，仅供测试使用<br />
-  [IDNWxPayer setNotifyUrl:@”http://www.example.com/wxnotify.php”]; //仅供测试使用</p>
-
-        <p>return YES;<br />
- }</p>
-      </li>
-    </ul>
-
-    <p>// ios &lt; 9.0<br />
- - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation<br />
- {<br />
-     if([IDNWxPayer handleOpenURL:url]) //处理从微信客户端跳转回来的url。返回 TRUE 表示成功处理了<br />
-         return YES;<br />
-     return NO;<br />
- }</p>
-
-    <p>// ios &gt;= 9.0<br />
- - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url options:(NSDictionary&lt;NSString *,id&gt; *)options<br />
- {<br />
-     if([IDNWxPayer handleOpenURL:url]) //处理从微信客户端跳转回来的url。返回 TRUE 表示成功处理了<br />
-         return YES;<br />
-     return NO;<br />
- }</p>
-
-    <p>```</p>
-  </li>
+  <li>在 AppDelegate.m 中加入初始化代码，<strong>注意要把初始化参数换成你自己的</strong></li>
 </ol>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">#import "IDNWxPayer.h"
+</span><span class="line">
+</span><span class="line">// 。。。其它代码。。。
+</span><span class="line">
+</span><span class="line">- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+</span><span class="line">	
+</span><span class="line">	[IDNWxPayer initWithAppId:@"wx1234567812345678" merchantId:@"1234567890"]; //
+</span><span class="line">	[IDNWxPayer setMerchantKey:@"12345678901234567890123456789012"]; //设置商户密钥，仅供测试使用
+</span><span class="line">	[IDNWxPayer setNotifyUrl:@"http://www.example.com/wxnotify.php"]; //仅供测试使用
+</span><span class="line">	
+</span><span class="line">	return YES;
+</span><span class="line">}
+</span><span class="line">
+</span><span class="line">// ios &lt; 9.0
+</span><span class="line">- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+</span><span class="line">{
+</span><span class="line">	if([IDNWxPayer handleOpenURL:url]) //处理从微信客户端跳转回来的url。返回 TRUE 表示成功处理了
+</span><span class="line">		return YES;
+</span><span class="line">	return NO;
+</span><span class="line">}
+</span><span class="line">	
+</span><span class="line">// ios &gt;= 9.0
+</span><span class="line">- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url options:(NSDictionary&lt;NSString *,id&gt; *)options
+</span><span class="line">{
+</span><span class="line">	if([IDNWxPayer handleOpenURL:url]) //处理从微信客户端跳转回来的url。返回 TRUE 表示成功处理了
+</span><span class="line">		return YES;
+</span><span class="line">	return NO;
+</span><span class="line">}
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>现在你可以开始编写支付代码了，不过在这之前，最好先了解一下微信支付流程</p>
 
