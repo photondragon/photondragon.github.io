@@ -35,6 +35,8 @@ code_dir: downloads/code
 category_dir: categories
 category_title_prefix: "分类: "
 markdown: kramdown
+kramdown:
+  input: GFM
 # rdiscount:
 #  extensions:
 #    - autolink

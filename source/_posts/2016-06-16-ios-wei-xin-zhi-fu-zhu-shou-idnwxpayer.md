@@ -3,10 +3,8 @@ layout: post
 title: "iOS 微信支付助手 IDNWxPayer"
 date: 2016-06-16 23:04:20 +0800
 comments: true
-categories: 
+categories: 共享代码
 ---
-
-# iOS 微信支付助手 IDNWxPayer
 
 demo示例程序 <https://github.com/photondragon/IDNWxPaySample>  
 示例程序要想正常运行，需要修改项目的 URL Schemes 和application:didFinishLaunchingWithOptions: 中的微信支付的初始化参数（参考后面的“项目准备”一节）
