@@ -30,39 +30,39 @@ IDNWxPayer 对微信支付ios端的整个支付流程进行了封装，把复杂
 	![设置URL Schemes](http://res.iosdev.net/images/post/2016-06-16-ios-wei-xin-zhi-fu-zhu-shou-idnwxpayer/20160616-urlSchemes.jpg)
 4. 链接这几个库: libc++.tdb, libsqlite3.tbd, libz.tbd, CoreTelephony.framework, SystemConfiguration.framework  
 	![链接库](http://res.iosdev.net/images/post/2016-06-16-ios-wei-xin-zhi-fu-zhu-shou-idnwxpayer/20160616-link-libs.png)
-5. 在 AppDelegate.m 中加入初始化代码，**注意要把初始化参数换成你自己的**  
+5. 在 AppDelegate.m 中加入初始化代码，**注意要把初始化参数换成你自己的**
 
-    ```
-    #import "IDNWxPayer.h"
+```
+#import "IDNWxPayer.h"
 
-    // 。。。其它代码。。。
+// 。。。其它代码。。。
 
-	- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 	
-		[IDNWxPayer initWithAppId:@"wx1234567812345678" merchantId:@"1234567890"]; //
-		[IDNWxPayer setMerchantKey:@"12345678901234567890123456789012"]; //设置商户密钥，仅供测试使用
-		[IDNWxPayer setNotifyUrl:@"http://www.example.com/wxnotify.php"]; //仅供测试使用
+	[IDNWxPayer initWithAppId:@"wx1234567812345678" merchantId:@"1234567890"]; //
+	[IDNWxPayer setMerchantKey:@"12345678901234567890123456789012"]; //设置商户密钥，仅供测试使用
+	[IDNWxPayer setNotifyUrl:@"http://www.example.com/wxnotify.php"]; //仅供测试使用
 	
+	return YES;
+}
+
+// ios < 9.0
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+	if([IDNWxPayer handleOpenURL:url]) //处理从微信客户端跳转回来的url。返回 TRUE 表示成功处理了
 		return YES;
-	}
-
-	// ios < 9.0
-	- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
-	{
-		if([IDNWxPayer handleOpenURL:url]) //处理从微信客户端跳转回来的url。返回 TRUE 表示成功处理了
-			return YES;
-		return NO;
-	}
+	return NO;
+}
 	
-	// ios >= 9.0
-	- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url options:(NSDictionary<NSString *,id> *)options
-	{
-		if([IDNWxPayer handleOpenURL:url]) //处理从微信客户端跳转回来的url。返回 TRUE 表示成功处理了
-			return YES;
-		return NO;
-	}
+// ios >= 9.0
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url options:(NSDictionary<NSString *,id> *)options
+{
+	if([IDNWxPayer handleOpenURL:url]) //处理从微信客户端跳转回来的url。返回 TRUE 表示成功处理了
+		return YES;
+	return NO;
+}
 
-	```
+```
 
 现在你可以开始编写支付代码了，不过在这之前，最好先了解一下微信支付流程
 
