@@ -143,162 +143,12 @@ var _hmt = _hmt || [];
 必定要调用的“核心方法”有三个，实际发起支付的方法就一个，其它的所谓“不安全操作”的方法只有在服务端开发没有完成的情况下才有必要使用。  <br />
 全部的代码都封装在两个源文件中，IDNWxPayer.h 和 IDNWxPayer.m ，除了微信官方提供的SDK库以外，不依赖任何第三方库。</p>
 
-<p>如果你发现了任何bug，欢迎<a href="https://github.com/photondragon/IDNWxPaySample/issues" title="提交Issues">提交Issues</a></p>
-
-<h2 id="section">使用方法</h2>
-
-<p>开发环境：xcode 7.3 + OS X EI Capitan 10.11.3</p>
-
-<h3 id="section-1">项目准备</h3>
-
-<ol>
-  <li>创建一个全新的xcode项目，加入源文件 IDNWxPayer.h 和 IDNWxPayer.m</li>
-  <li>下载 <a href="https://res.wx.qq.com/open/zh_CN/htmledition/res/dev/download/sdk/WeChatSDK1.7.1.zip" title="微信支付官方SDK">微信支付官方SDK</a> ，把解压出来的文件夹 OpenSDK1.7.1 整个加入项目中</li>
-  <li>为项目添加 URL Schemes = <你的微信支付的appid>
- ![设置URL Schemes](http://res.iosdev.net/images/post/2016-06-16-ios-wei-xin-zhi-fu-zhu-shou-idnwxpayer/20160616-urlSchemes.jpg)</你的微信支付的appid></li>
-  <li>链接这几个库: libc++.tdb, libsqlite3.tbd, libz.tbd, CoreTelephony.framework, SystemConfiguration.framework<br />
- <img src="http://res.iosdev.net/images/post/2016-06-16-ios-wei-xin-zhi-fu-zhu-shou-idnwxpayer/20160616-link-libs.png" alt="链接库" /></li>
-  <li>
-    <p>在 AppDelegate.m 中加入初始化代码，<strong>注意要把初始化参数换成你自己的</strong></p>
-
-    <p>``` objective-c<br />
- #import “IDNWxPayer.h”</p>
-
-    <p>// 。。。其它代码。。。</p>
-
-    <ul>
-      <li>
-        <p>(BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {</p>
-
-        <p>[IDNWxPayer initWithAppId:@”wx1234567812345678” merchantId:@”1234567890”]; //<br />
-  [IDNWxPayer setMerchantKey:@”12345678901234567890123456789012”]; //设置商户密钥，仅供测试使用<br />
-  [IDNWxPayer setNotifyUrl:@”http://www.example.com/wxnotify.php”]; //仅供测试使用</p>
-
-        <p>return YES;<br />
- }</p>
-      </li>
-    </ul>
-
-    <p>// ios &lt; 9.0<br />
- - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation<br />
- {<br />
-     if([IDNWxPayer handleOpenURL:url]) //处理从微信客户端跳转回来的url。返回 TRUE 表示成功处理了<br />
-         return YES;<br />
-     return NO;<br />
- }</p>
-
-    <p>// ios &gt;= 9.0<br />
- - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url options:(NSDictionary&lt;NSString *,id&gt; *)options<br />
- {<br />
-     if([IDNWxPayer handleOpenURL:url]) //处理从微信客户端跳转回来的url。返回 TRUE 表示成功处理了<br />
-         return YES;<br />
-     return NO;<br />
- }</p>
-
-    <p>```</p>
-  </li>
-</ol>
-
-<p>现在你可以开始编写支付代码了，不过在这之前，最好先了解一下微信支付流程</p>
-
-<h3 id="section-2">微信支付流程：</h3>
-<ol>
-  <li>向微信下单，得到prepayId（建议在服务端实现）</li>
-  <li>根据prepayId生成<strong>包含签名</strong>的“支付请求参数”（建议在服务端实现）</li>
-  <li>你的客户端发起支付（需要第2步生成的支付请求参数）</li>
-  <li>自动跳转到微信客户端，用户付款，成功或取消后会自动跳转回你的客户端（如果付款成功，微信服务器会通知你的服务器）</li>
-  <li>你的客户端（向你的服务器）验证支付结果</li>
-</ol>
-
-<h3 id="section-3">编写支付代码</h3>
-
-<h4 id="section-4">正常情况😄</h4>
-
-<p>如果你们的服务端小伙伴把微信支付流程的第1，2步都搞定了，把支付请求参数传给了客户端😄，那么你只需要调用 +payWithParams:result: 方法就可以发起微信支付了，示例代码如下：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-</pre></td><td class="code"><pre><code class="objective-c"><span class="line"><span class="p">[</span><span class="n">IDNWxPayer</span> <span class="nl">payWithParams</span><span class="p">:</span><span class="n">payParams</span> <span class="nl">result</span><span class="p">:</span><span class="o">^</span><span class="p">(</span><span class="bp">NSError</span> <span class="o">*</span><span class="n">error</span><span class="p">)</span> <span class="p">{</span>
-</span><span class="line">	<span class="k">if</span><span class="p">(</span><span class="n">error</span><span class="p">){</span>
-</span><span class="line">		<span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;支付失败：%@&quot;</span><span class="p">,</span> <span class="n">error</span><span class="p">.</span><span class="n">localizedDescription</span><span class="p">);</span>
-</span><span class="line">	<span class="p">}</span>
-</span><span class="line">	<span class="k">else</span><span class="p">{</span>
-</span><span class="line">		<span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;支付成功（只是“支付”成功）&quot;</span><span class="p">);</span>
-</span><span class="line">		<span class="c1">// todo 这里还要向你的服务器验证支付结果（检测订单是否完成）</span>
-</span><span class="line">	<span class="p">}</span>
-</span><span class="line"><span class="p">}];</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-<p><strong>注意</strong>：result这个block是用来接收支付结果的，error==nil表示支付成功，否则表示支付失败。但是result这个block<strong>不一定会被调用</strong>，因为你可以在跳转到微信客户端后直接关闭微信，然后手动点开自己的应用，而不是让微信自动跳回。这种情况怎么处理可以到 IDNWxPayer.h 里去看函数文档。</p>
-
-<h4 id="section-5">情况2🙁</h4>
-
-<p>如果你们的服务端小伙伴搞定了微信支付流程的第1步，然后给了你一个prepayid🙁，那么你可以调用 +payWithPrepayId:result: 方法发起微信支付，但必须在初始化的时候调用 +setMerchantKey: 设置商户密钥（用于签名），示例代码如下：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-</pre></td><td class="code"><pre><code class="objective-c"><span class="line"><span class="p">[</span><span class="n">IDNWxPayer</span> <span class="nl">payWithPrepayId</span><span class="p">:</span><span class="n">prepayId</span> <span class="nl">result</span><span class="p">:</span><span class="o">^</span><span class="p">(</span><span class="bp">NSError</span> <span class="o">*</span><span class="n">error</span><span class="p">)</span> <span class="p">{</span>
-</span><span class="line">	<span class="k">if</span><span class="p">(</span><span class="n">error</span><span class="p">){</span>
-</span><span class="line">		<span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;支付失败：%@&quot;</span><span class="p">,</span> <span class="n">error</span><span class="p">.</span><span class="n">localizedDescription</span><span class="p">);</span>
-</span><span class="line">	<span class="p">}</span>
-</span><span class="line">	<span class="k">else</span><span class="p">{</span>
-</span><span class="line">		<span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;支付成功（只是“支付”成功）&quot;</span><span class="p">);</span>
-</span><span class="line">		<span class="c1">// todo 这里还要向你的服务器验证支付结果（检测订单是否完成）</span>
-</span><span class="line">	<span class="p">}</span>
-</span><span class="line"><span class="p">}];</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<h4 id="section-6">情况3😠</h4>
-
-<p>如果你们的服务端小伙伴连微信支付流程的第1步都还没搞定😠，怎么办呢？当然有办法，我们可以自己向微信服务器下单（前提是在初始化的时候设置了merchantKey和notifyUrl）。  <br />
-先调用 +prepayWithOrderId:amount:orderTitle:orderDetail:callback: 方法下单（参数你就随便填吧，反正只是测试），下单成功后通过 callback 得到支付请求参数，再调用 +payWithParams:result: 发起支付，示例代码如下：</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-</pre></td><td class="code"><pre><code class="objective-c"><span class="line"><span class="p">[</span><span class="n">IDNWxPayer</span> <span class="nl">prepayWithOrderId</span><span class="p">:</span><span class="n">orderId</span> <span class="nl">amount</span><span class="p">:</span><span class="n">amount</span> <span class="nl">orderTitle</span><span class="p">:</span><span class="n">orderTitle</span> <span class="nl">orderDetail</span><span class="p">:</span><span class="nb">nil</span> <span class="nl">callback</span><span class="p">:</span><span class="o">^</span><span class="p">(</span><span class="bp">NSDictionary</span> <span class="o">*</span><span class="n">payParams</span><span class="p">,</span> <span class="bp">NSError</span> <span class="o">*</span><span class="n">error</span><span class="p">)</span> <span class="p">{</span>
-</span><span class="line">	<span class="k">if</span><span class="p">(</span><span class="n">error</span><span class="p">){</span>
-</span><span class="line">		<span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;下单失败：%@&quot;</span><span class="p">,</span> <span class="n">error</span><span class="p">.</span><span class="n">localizedDescription</span><span class="p">);</span>
-</span><span class="line">	<span class="p">}</span>
-</span><span class="line">	<span class="k">else</span><span class="p">{</span>
-</span><span class="line">		<span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;下单成功：%@&quot;</span><span class="p">,</span> <span class="n">payParams</span><span class="p">);</span>
-</span><span class="line">		<span class="c1">// 发起微信支付</span>
-</span><span class="line">		<span class="p">[</span><span class="n">IDNWxPayer</span> <span class="nl">payWithParams</span><span class="p">:</span><span class="n">payParams</span> <span class="nl">result</span><span class="p">:</span><span class="o">^</span><span class="p">(</span><span class="bp">NSError</span> <span class="o">*</span><span class="n">error</span><span class="p">)</span> <span class="p">{</span>
-</span><span class="line">			<span class="c1">// ...此处省略处理支付结果的代码...</span>
-</span><span class="line">		<span class="p">}];</span>
-</span><span class="line">	<span class="p">}</span>
-</span><span class="line"><span class="p">}];</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<h2 id="section-7">参考</h2>
-<ol>
-  <li><a href="https://pay.weixin.qq.com/wiki/doc/api/app/app.php?chapter=8_5" title="微信支付官方IOS文档">微信支付官方IOS文档</a></li>
-  <li><a href="https://pay.weixin.qq.com/wiki/doc/api/app/app.php?chapter=11_1" title="微信支付全部 SDK 下载页面">微信支付全部 SDK 下载页面</a></li>
-</ol>
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/articles/201606/ios-wei-xin-zhi-fu-zhu-shou-idnwxpayer">阅读全文</a>
+    </footer>
   
 
 
@@ -444,9 +294,9 @@ var _hmt = _hmt || [];
 <section>
   <h1>分类目录</h1>
   <ul id="categories">
-    <li class='category'><a href='/categories/gong-xiang-dai-ma/'>共享代码 (1)</a></li>
-<li class='category'><a href='/categories/shi-yong-ji-qiao/'>实用技巧 (1)</a></li>
+    <li class='category'><a href='/categories/shi-yong-ji-qiao/'>实用技巧 (1)</a></li>
 <li class='category'><a href='/categories/za-xiang/'>杂项 (2)</a></li>
+<li class='category'><a href='/categories/yuan-ma-gong-xiang/'>源码共享 (1)</a></li>
 
   </ul>
 </section>

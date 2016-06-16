@@ -4,7 +4,7 @@
   <title><![CDATA[迷途老码的博客]]></title>
   <link href="http://blog.iosdev.net/atom.xml" rel="self"/>
   <link href="http://blog.iosdev.net/"/>
-  <updated>2016-06-17T05:35:31+08:00</updated>
+  <updated>2016-06-17T06:35:08+08:00</updated>
   <id>http://blog.iosdev.net/</id>
   <author>
     <name><![CDATA[photondragon]]></name>
@@ -26,6 +26,8 @@
 必定要调用的“核心方法”有三个，实际发起支付的方法就一个，其它的所谓“不安全操作”的方法只有在服务端开发没有完成的情况下才有必要使用。  <br />
 全部的代码都封装在两个源文件中，IDNWxPayer.h 和 IDNWxPayer.m ，除了微信官方提供的SDK库以外，不依赖任何第三方库。</p>
 
+<!--more-->
+
 <p>如果你发现了任何bug，欢迎<a href="https://github.com/photondragon/IDNWxPaySample/issues" title="提交Issues">提交Issues</a></p>
 
 <h2 id="section">使用方法</h2>
@@ -37,9 +39,9 @@
 <ol>
   <li>创建一个全新的xcode项目，加入源文件 IDNWxPayer.h 和 IDNWxPayer.m</li>
   <li>下载 <a href="https://res.wx.qq.com/open/zh_CN/htmledition/res/dev/download/sdk/WeChatSDK1.7.1.zip" title="微信支付官方SDK">微信支付官方SDK</a> ，把解压出来的文件夹 OpenSDK1.7.1 整个加入项目中</li>
-  <li>为项目添加 URL Schemes = <你的微信支付的appid>
+  <li>为项目添加 URL Schemes = <你的微信支付的appid>  
  ![设置URL Schemes](http://res.iosdev.net/images/post/2016-06-16-ios-wei-xin-zhi-fu-zhu-shou-idnwxpayer/20160616-urlSchemes.jpg)</你的微信支付的appid></li>
-  <li>链接这几个库: libc++.tdb, libsqlite3.tbd, libz.tbd, CoreTelephony.framework, SystemConfiguration.framework<br />
+  <li>链接这几个库: libc++.tdb, libsqlite3.tbd, libz.tbd, CoreTelephony.framework, SystemConfiguration.framework  <br />
  <img src="http://res.iosdev.net/images/post/2016-06-16-ios-wei-xin-zhi-fu-zhu-shou-idnwxpayer/20160616-link-libs.png" alt="链接库" /></li>
   <li>
     <p>在 AppDelegate.m 中加入初始化代码，<strong>注意要把初始化参数换成你自己的</strong></p>
