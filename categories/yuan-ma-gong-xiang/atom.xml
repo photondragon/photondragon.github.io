@@ -4,7 +4,7 @@
   <title><![CDATA[分类: 源码共享 | 迷途老码的博客]]></title>
   <link href="http://blog.iosdev.net/categories/yuan-ma-gong-xiang/atom.xml" rel="self"/>
   <link href="http://blog.iosdev.net/"/>
-  <updated>2016-06-17T06:51:15+08:00</updated>
+  <updated>2016-06-17T06:57:14+08:00</updated>
   <id>http://blog.iosdev.net/</id>
   <author>
     <name><![CDATA[photondragon]]></name>
@@ -46,7 +46,7 @@
   <li>在 AppDelegate.m 中加入初始化代码，<strong>注意要把初始化参数换成你自己的</strong></li>
 </ol>
 
-<pre><code>#import "IDNWxPayer.h"
+<pre><code class="language-objective-c">#import "IDNWxPayer.h"
 
 // 。。。其它代码。。。
 
